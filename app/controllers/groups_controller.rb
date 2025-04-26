@@ -18,6 +18,32 @@ class GroupsController < ApplicationController
     redirect_to  groups_path
   end
 
+  
+  def new_mail
+    @group = Group.find(params[:id])  # ← `params[:group_id]` → `params[:id]` に変更
+    @mail_title = ""
+    @mail_content = ""
+  end
+  
+  
+  
+  
+  
+
+
+  def send_mail
+    @group = Group.find(params[:id])  # ← `params[:group_id]` → `params[:id]` に変更
+    @mail_title = params[:mail_title]
+    @mail_content = params[:mail_content]
+  
+    UserMailer.send_mail(@mail_title, @mail_content, @group.users).deliver_now
+  
+    render 'send_mail'  # 送信完了後、`send_mail.html.erb` を表示
+  end
+  
+  
+
+
   def new
     @group = Group.new
   end

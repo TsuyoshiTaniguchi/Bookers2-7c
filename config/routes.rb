@@ -18,8 +18,17 @@ Rails.application.routes.draw do
   get "search" => "searches#search"
 
   resources :groups do
-    get 'join' => 'groups#join'
+    get 'new_mail', on: :member
+    post 'send_mail', on: :member  # ← `on: :member` で定義する
   end
+  
+  
+  
+  
+  
+  
+  
+  
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
